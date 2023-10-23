@@ -1,0 +1,103 @@
+{% load static%}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employee Prediction Result</title>
+    <style>
+        body {
+            background-color: #7fe9ec; /* Set your desired background color */
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+
+        h1 {
+            color: #333; /* Set your desired header text color */
+        }
+
+        table {
+            margin: 20px auto;
+            border-collapse: collapse;
+            width: 80%;
+        }
+
+        table, th, td {
+            border: 1px solid #333; /* Set your desired table border color */
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: center;
+        }
+
+        .prediction-message {
+            font-weight: bold;
+            font-size: 18px;
+            margin-top: 20px;
+        }
+
+        .result-image {
+            width: 300px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Employee Prediction Result</h1>
+    
+    <table>
+        <tr>
+            <th>Attribute</th>
+            <th>Value</th>
+        </tr>
+        <tr>
+            <td>Age</td>
+            <td>{{ age }}</td>
+        </tr>
+        <tr>
+            <td>Department</td>
+            <td>{{ department }}</td>
+        </tr>
+        <tr>
+            <td>Distance</td>
+            <td>{{ distance }}</td>
+        </tr>
+        <tr>
+            <td>Gender</td>
+            <td>{{ gender }}</td>
+        </tr>
+        <tr>
+            <td>Job Satisfaction</td>
+            <td>{{ job_satisfaction }}</td>
+        </tr>
+        <tr>
+            <td>Marital Status</td>
+            <td>{{ marital_status }}</td>
+        </tr>
+        <tr>
+            <td>Overtime</td>
+            <td>{{ overtime }}</td>
+        </tr>
+        <tr>
+            <td>Salary Hike</td>
+            <td>{{ salary_hike }}</td>
+        </tr>
+        <tr>
+            <td>Years of Promotion</td>
+            <td>{{ years_promotion }}</td>
+        </tr>
+    </table>
+
+    <p class="prediction-message">
+        {% if prediction_flag == 'yes' %}
+            According to the given data, this employee may leave the company.
+        {% else %}
+            According to the given data, this employee is not likely to leave the company.
+        {% endif %}
+    </p>
+
+    <img class="result-image" src="https://media.istockphoto.com/id/1288148699/photo/young-business-woman-in-office-stock-photo.jpg?s=612x612&w=is&k=20&c=J7o2Kf5dAPdc76ek_2a-KqPJ1E2Sqr7L202lG9E02CU=" alt="Result Image">
+
+</body>
+</html>

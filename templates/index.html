@@ -1,0 +1,79 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome to David</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            text-align: center;
+        }
+
+        header {
+            margin-bottom: 30px;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            color: #333;
+        }
+
+        main {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            height: calc(100vh - 100px); /* Adjust the height based on your needs */
+        }
+
+        .button-section .btn {
+            display: inline-block;
+            padding: 10px 50px;
+            background-color: #007bff;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 1.2rem;
+            transition: background-color 0.3s ease;
+        }
+
+        .button-section .btn:hover {
+            background-color: #0056b3;
+        }
+
+        .welcome-image {
+            margin-top: 10px;
+            max-width: 20000000%; /* Increase the image size to cover more of the screen */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>HI DAVID </h1>
+            <h1>CASE STUDY TOPIC-  </h1>
+            <h2>"LET'S CHECK EMPLOYEE LEAVE WILL LEAVE THE COMPANY OR NOT"  </h2>
+        </header>
+        <main>
+            <img class="welcome-image" src="https://media.istockphoto.com/id/512979254/photo/large-open-space-office.jpg?s=612x612&w=0&k=20&c=T0GhSsrqKad4iFzALLa3PwCwvAl14BR44eLX9M_Jp04=" alt="Welcome Image">
+            <div class="button-section">
+                <form action='/myapp/user_info/' method="post">
+                    {% csrf_token %}
+                    <button type="submit" class="btn">Let's Try</button>
+                </form>
+            </div>
+        </main>
+    </div>
+</body>
+</html>

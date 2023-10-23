@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+  }
+  .input-container {
+    background-color: #f8f8f8;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    width: 400px;
+  }
+  h1 {
+    font-size: 24px;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+  input[type="text"], select, input[type="number"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  .button-group {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 15px;
+  }
+  .button-group label {
+    flex: 1;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: #ddd;
+    text-align: center;
+  }
+  .button-group label.selected {
+    background-color: #4caf50;
+    color: #fff;
+  }
+  .button-group label:hover {
+    background-color: #ccc;
+  }
+  .radio-group {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+  .radio-group label {
+    margin-right: 15px;
+  }
+  .submit-button {
+    background-color: #4caf50;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    cursor: pointer;
+    width: 100%;
+  }
+  .submit-button:hover {
+    background-color: #45a049;
+  }
+  .error-message {
+    color: red;
+    font-size: 14px;
+    margin-top: 5px;
+  }
+</style>
+<title>User Input Form</title>
+<script>
+  function selectOption(button) {
+    var buttons = document.querySelectorAll('.button-group label');
+    buttons.forEach(function(btn) {
+      btn.classList.remove('selected');
+    });
+    button.classList.add('selected');
+  }
+
+  function submitForm() {
+    var age = document.getElementById('age').value;
+    var selectedGender = document.getElementById('gender').value;
+    var selectedMaritalStatus = document.querySelector('input[name="marital_status"]:checked');
+    
+    var errorMsg = document.getElementById('error-msg');
+    errorMsg.textContent = '';
+
+    if (!age || !selectedGender || !selectedMaritalStatus) {
+      errorMsg.textContent = 'Please fill out all required fields.';
+    } else {
+      document.getElementById('userForm').submit();
+    }
+  }
+</script>
+</head>
+<body>
+<div class="input-container">
+  <h1>User Input Form</h1>
+  <form id="userForm" action="/myapp/submit-form/" method="post"> <!-- Specify the action and method for form submission -->
+    {% csrf_token %} <!-- Include the CSRF token for security -->
+    <label for="age">Age:</label>
+    <input type="text" id="age" name="age" placeholder="Enter your age">
+    <div class="button-group">
+      <label onclick="selectOption(this)">
+        <input type="radio" name="department" value="Sales"> Sales
+      </label>
+      <label onclick="selectOption(this)">
+        <input type="radio" name="department" value="Research & Development"> Research & Development
+      </label>
+      <label onclick="selectOption(this)">
+        <input type="radio" name="department" value="Human Resources"> Human Resources
+      </label>
+    </div>
+    <label for="distance">Distance from Home:</label>
+    <input type="text" id="distance" name="distance" placeholder="Enter distance">
+    <label for="gender">Gender:</label>
+    <select id="gender" name="gender">
+      <option value="male">Male</option>
+      <option value="female">Female</option>
+    </select>
+    <label for="job_satisfaction">Job Satisfaction:</label>
+    <input type="number" id="job_satisfaction" name="job_satisfaction" min="1" max="5" placeholder="Rate from 1 to 5">
+    <div class="radio-group">
+      <label for="marital_status">Marital Status:</label>
+      <label><input type="radio" name="marital_status" value="single">Single</label>
+      <label><input type="radio" name="marital_status" value="married">Married</label>
+      <label><input type="radio" name="marital_status" value="divorced">Divorced</label>
+    </div>
+    <label for="overtime">OverTime:</label>
+    <select id="overtime" name="overtime">
+      <option value="yes">Yes</option>
+      <option value="no">No</option>
+    </select>
+    <label for="salary_hike">Percent Salary Hike:</label>
+    <input type="number" id="salary_hike" name="salary_hike" placeholder="Enter percent hike">
+    <label for="years_promotion">Years Since Last Promotion:</label>
+    <input type="number" id="years_promotion" name="years_promotion" placeholder="Enter years">
+    <button class="submit-button" type="button" onclick="submitForm()">Submit</button>
+    <div class="error-message" id="error-msg"></div>
+  </form>
+</div>
+</body>
+</html>
